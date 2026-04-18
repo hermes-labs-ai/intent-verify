@@ -1,0 +1,2 @@
+[console_scripts]
+intent-verify = intent_verify.cli:main
