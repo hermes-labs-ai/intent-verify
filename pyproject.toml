@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "intent-verify"
 version = "0.1.0"
-description = "Deterministic spec coverage lint for repositories and agent handoffs."
+description = "Repo intent verification and spec drift checks for markdown specs, handoffs, and codebases."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
   {name = "Rolando Bosch"},
 ]
-keywords = ["spec", "intent", "verification", "lint", "ci"]
+keywords = ["spec drift", "repo intent verification", "handoff verification", "acceptance criteria", "ci lint"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",

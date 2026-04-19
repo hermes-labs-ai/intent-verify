@@ -1,20 +1,38 @@
-# intent-verify
+# intent-verify: repo intent verification and spec drift checks
 
-`intent-verify` is a deterministic spec-coverage lint for repositories and agent handoffs.
+Find spec drift fast when your repo has an `INTENT.md`, `SPEC.md`, or handoff doc but nobody knows if the code still matches it.
 
-It reads a markdown spec file, extracts acceptance items, scans a codebase for lexical evidence of those items, and returns one of three verdicts:
+`intent-verify` checks a markdown spec against a repo and returns `verified`, `partial`, or `missing` so you can catch repo intent drift before review, release, or handoff.
 
-- `verified`
-- `partial`
-- `missing`
+- "My repo has an `INTENT.md` but nobody knows if the code still matches it."
+- "Reviews catch scope drift too late."
+- "A handoff doc says one thing and the implementation says another."
+- "I want a cheap CI check for spec drift before merge."
+- "We need repo intent verification without inventing another full compliance system."
+
+Fastest install:
+
+```bash
+pip install intent-verify
+```
+
+Fastest real usage:
+
+```bash
+intent-verify check --spec INTENT.md --repo .
+```
+
+Exact outcome:
+
+```text
+intent-verify: INTENT.md vs . (12 files)
+  [OK   100%] uploads PDF invoices
+  [PART  50%] retries provider timeout
+  [LOW   20%] writes audit log for rejected invoices
+intent-verify: MISSING — 1/3 items below 30% (avg 57%)
+```
 
 This is a guardrail, not proof of correctness. It answers “does the implementation visibly cover the stated scope?” not “is the software correct?”
-
-## Why this exists
-
-Teams often have an `INTENT.md`, `SPEC.md`, or handoff doc that says what a repo should do. The implementation drifts. Reviews catch some of it, but late and inconsistently.
-
-`intent-verify` gives you a fast, cheap check you can run in CI or before handoff.
 
 ## Install
 
@@ -27,6 +45,14 @@ For local development:
 ```bash
 pip install -e ".[dev]"
 ```
+
+## Common search-intent use cases
+
+- repo intent verification
+- spec drift check
+- handoff verification
+- acceptance criteria drift detection
+- CI check for markdown spec vs code
 
 ## Usage
 
@@ -49,13 +75,13 @@ It also supports custom headings:
 intent-verify check --spec SPEC.md --section "Requirements"
 ```
 
-## Example output
+## Output
 
 ```text
 intent-verify: INTENT.md vs . (12 files)
-  [OK   100%] Accepts uploaded PDF invoices
-  [PART  50%] Retries provider timeout
-  [LOW   20%] Emits audit trail for rejected invoices
+  [OK   100%] uploads PDF invoices
+  [PART  50%] retries provider timeout
+  [LOW   20%] writes audit log for rejected invoices
 intent-verify: MISSING — 1/3 items below 35% (avg 57%)
 ```
 
@@ -71,6 +97,18 @@ intent-verify check --spec INTENT.md --repo . --json
 - Can over-credit token overlap.
 - Can under-credit implementations expressed with different vocabulary.
 - Best used as a CI guardrail or review hint, not as a substitute for tests and code review.
+
+## When To Use It
+
+- You keep project intent in markdown.
+- You want a lightweight repo intent verification step in CI.
+- You need a handoff verification check before merging or releasing.
+
+## When Not To Use It
+
+- You need semantic verification of behavior.
+- You do not have any human-readable spec, intent, or requirements file.
+- You want proof of correctness instead of a fast drift signal.
 
 ## Development
 

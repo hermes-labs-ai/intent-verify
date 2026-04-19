@@ -1,0 +1,23 @@
+intent-verify
+
+Purpose:
+- Detect repo intent drift by comparing a markdown spec file to a codebase.
+
+Use when:
+- The repo has INTENT.md, SPEC.md, requirements, or handoff docs.
+- You need a quick spec drift or handoff verification check.
+
+Do not use when:
+- You need semantic verification or proof of correctness.
+
+Command:
+- `intent-verify check --spec INTENT.md --repo .`
+- `intent-verify check --spec SPEC.md --repo . --json`
+
+Output:
+- Text verdict: `verified`, `partial`, or `missing`
+- JSON object with parsed items and coverage scores
+
+Limits:
+- Lexical matching only
+- Can miss valid implementations with different wording

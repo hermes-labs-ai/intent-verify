@@ -9,21 +9,39 @@ from .report import run_check, to_json, to_text
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="intent-verify")
+    parser = argparse.ArgumentParser(
+        prog="intent-verify",
+        description="Check a markdown spec or handoff doc against a repo to catch spec drift.",
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    check = subparsers.add_parser("check", help="check a repo against a markdown spec")
-    check.add_argument("--spec", required=True, help="path to markdown spec file")
-    check.add_argument("--repo", required=True, help="path to repo or source tree")
-    check.add_argument("--section", help="optional section heading to target")
-    check.add_argument("--json", action="store_true", help="emit JSON instead of text")
+    check = subparsers.add_parser(
+        "check",
+        help="run repo intent verification against a markdown spec",
+    )
+    check.add_argument(
+        "--spec",
+        required=True,
+        help="path to markdown spec, intent, or handoff file",
+    )
+    check.add_argument("--repo", required=True, help="path to repo or source tree to scan")
+    check.add_argument(
+        "--section",
+        help="optional markdown heading to target, for example Requirements",
+    )
+    check.add_argument("--json", action="store_true", help="emit machine-readable JSON output")
     check.add_argument(
         "--min-verified",
         type=float,
         default=0.7,
-        help="average/item threshold for verified",
+        help="coverage threshold an item must clear to count as verified",
     )
-    check.add_argument("--min-item", type=float, default=0.3, help="minimum per-item threshold")
+    check.add_argument(
+        "--min-item",
+        type=float,
+        default=0.3,
+        help="minimum per-item threshold before the result becomes missing",
+    )
 
     return parser
 
