@@ -21,3 +21,4 @@ Output:
 Limits:
 - Lexical matching only
 - Can miss valid implementations with different wording
+- Excludes the spec file itself from implementation evidence

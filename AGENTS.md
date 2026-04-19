@@ -57,6 +57,7 @@ JSON mode:
 - repo path is wrong
 - thresholds are invalid
 - spec language is too abstract for lexical matching
+- the only matching text is inside the spec itself, not the implementation
 
 ## What counts as success
 

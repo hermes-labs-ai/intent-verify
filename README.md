@@ -32,6 +32,8 @@ intent-verify: INTENT.md vs . (12 files)
 intent-verify: MISSING — 1/3 items below 30% (avg 57%)
 ```
 
+![intent-verify preview](assets/preview.png)
+
 This is a guardrail, not proof of correctness. It answers “does the implementation visibly cover the stated scope?” not “is the software correct?”
 
 ## Install
@@ -109,6 +111,10 @@ intent-verify check --spec INTENT.md --repo . --json
 - You need semantic verification of behavior.
 - You do not have any human-readable spec, intent, or requirements file.
 - You want proof of correctness instead of a fast drift signal.
+
+## More From Hermes Labs
+
+- [csv-quality-gate](https://github.com/roli-lpci/csv-quality-gate): CSV preflight validation and batch CSV quality checks
 
 ## Development
 

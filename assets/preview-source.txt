@@ -1,0 +1,6 @@
+$ intent-verify check --spec INTENT.md --repo .
+intent-verify: INTENT.md vs . (12 files)
+  [OK   100%] uploads PDF invoices
+  [PART  50%] retries provider timeout
+  [LOW   20%] writes audit log for rejected invoices
+intent-verify: MISSING — 1/3 items below 30% (avg 57%)
