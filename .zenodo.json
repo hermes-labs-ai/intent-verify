@@ -1,0 +1,27 @@
+{
+  "title": "intent-verify: a deterministic spec-drift checker for markdown specs and codebases",
+  "description": "intent-verify is a deterministic spec-drift checker that verifies whether a repo's code still covers the acceptance items stated in a markdown spec, INTENT.md, or handoff doc. It parses acceptance items, scores lexical token overlap against the codebase, and returns verified / partial / missing so teams catch repo intent drift before review, release, or handoff. Deterministic, zero-LLM, no network.",
+  "upload_type": "software",
+  "creators": [
+    { "name": "Bosch Rodriguez, Rolando", "orcid": "0009-0005-4896-1112", "affiliation": "Hermes Labs" }
+  ],
+  "keywords": [
+    "AI reliability",
+    "LLM reliability",
+    "spec-drift checker",
+    "silent failure modes",
+    "spec drift detection",
+    "repo intent verification",
+    "handoff verification",
+    "zero-LLM"
+  ],
+  "license": "MIT",
+  "version": "0.1.0",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.19042469",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ]
+}
