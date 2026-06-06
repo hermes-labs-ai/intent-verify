@@ -1,30 +1,33 @@
 intent-verify
 
-Purpose:
-- Detect repo intent drift by comparing a markdown spec file to a codebase.
+Summary:
+- intent-verify is a deterministic, zero-LLM CLI that checks whether a repo's source still lexically covers the acceptance items in a markdown spec, INTENT.md, or handoff doc.
 
 Use when:
 - The repo has INTENT.md, SPEC.md, requirements, or handoff docs.
-- You need a quick spec drift or handoff verification check.
+- You want a quick spec-drift or handoff check before review, release, or merge.
 
 Do not use when:
-- You need semantic verification or proof of correctness.
+- You need semantic verification of behavior.
+- You want proof of correctness rather than a fast lexical drift signal.
+- There is no human-readable spec to check against.
+
+How it works:
+- Parses acceptance items from the spec, tokenizes them, and measures the fraction of each item's tokens that appear as substrings in the repo's source files. The spec file itself is excluded from the evidence.
 
 Command:
-- `intent-verify check --spec INTENT.md --repo .`
-- `intent-verify check --spec SPEC.md --repo . --json`
+- intent-verify check --spec INTENT.md --repo .
+- intent-verify check --spec SPEC.md --repo . --json
 
 Output:
-- Text verdict: `verified`, `partial`, or `missing`
-- JSON object with parsed items and coverage scores
+- Text verdict: verified, partial, or missing (exit codes 0, 1, 2).
+- JSON object with parsed items, tokens, and per-item coverage scores.
 
 Limits:
-- Lexical matching only
-- Can miss valid implementations with different wording
-- Excludes the spec file itself from implementation evidence
+- Lexical matching only; can over-credit incidental token overlap and under-credit valid implementations that use different wording.
+- Not a substitute for tests or code review.
 
+Part of the Hermes Labs reliability stack: https://github.com/hermes-labs-ai
 
-## About Hermes Labs
-
-Hermes Labs is an independent AI-reliability lab building open-source tools that catch silent failure modes in production AI. More at https://hermes-labs.ai
-
+About Hermes Labs:
+- Hermes Labs is an independent AI-reliability lab building open-source tools that catch silent failure modes in production AI. More at https://hermes-labs.ai

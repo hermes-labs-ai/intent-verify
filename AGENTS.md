@@ -61,6 +61,10 @@ JSON mode:
 
 ## What counts as success
 
-- `verified` means every parsed item cleared the verified threshold
-- `partial` means at least one item is only partly covered
-- `missing` means at least one item fell below the minimum per-item threshold
+- `verified` (exit code 0) means every parsed item cleared the verified threshold
+- `partial` (exit code 1) means at least one item is only partly covered
+- `missing` (exit code 2) means at least one item fell below the minimum per-item threshold
+
+## Where this fits
+
+Part of the Hermes Labs reliability stack: https://github.com/hermes-labs-ai

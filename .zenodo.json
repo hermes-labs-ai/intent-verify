@@ -1,6 +1,6 @@
 {
   "title": "intent-verify: a deterministic spec-drift checker for markdown specs and codebases",
-  "description": "intent-verify is a deterministic spec-drift checker that verifies whether a repo's code still covers the acceptance items stated in a markdown spec, INTENT.md, or handoff doc. It parses acceptance items, scores lexical token overlap against the codebase, and returns verified / partial / missing so teams catch repo intent drift before review, release, or handoff. Deterministic, zero-LLM, no network.",
+  "description": "intent-verify is a deterministic spec-drift checker that checks whether a repo's source still lexically covers the acceptance items stated in a markdown spec, INTENT.md, or handoff doc. It parses acceptance items, scores lexical token overlap against the codebase, and returns verified / partial / missing so teams catch repo intent drift before review, release, or handoff. Deterministic, zero-LLM, no network. Lexical coverage is a drift signal, not proof of correctness.",
   "upload_type": "software",
   "creators": [
     {
