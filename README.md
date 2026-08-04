@@ -105,6 +105,7 @@ The JSON object includes `spec_path`, `repo_path`, `files_scanned`, `average_cov
 
 ## Limitations / what it does NOT do
 
+- **Not runtime agent intent verification.** It does not authorize or monitor AI-agent actions, MCP/tool calls, or permissions; it checks static repository source against a markdown spec.
 - **Lexical, not semantic.** It matches tokens as substrings; it does not understand meaning, control flow, or behavior.
 - **It can over-credit.** A token appearing anywhere in any scanned file counts, even if it is in a comment, a string, or an unrelated context.
 - **It can under-credit.** A correct implementation written with different vocabulary than the spec will score low.
