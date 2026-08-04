@@ -30,6 +30,13 @@ intent-verify = "intent_verify.cli:main"
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.5"]
 
+[project.urls]
+Homepage = "https://github.com/hermes-labs-ai/intent-verify"
+Documentation = "https://github.com/hermes-labs-ai/intent-verify#readme"
+Repository = "https://github.com/hermes-labs-ai/intent-verify"
+Issues = "https://github.com/hermes-labs-ai/intent-verify/issues"
+Changelog = "https://github.com/hermes-labs-ai/intent-verify/blob/main/CHANGELOG.md"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
