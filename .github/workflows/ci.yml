@@ -65,3 +65,34 @@ jobs:
           test "$PARTIAL_VERDICT" = partial
           test "$GAP_OUTCOME" = failure
           test "$GAP_VERDICT" = gap
+
+  advisory-coverage-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+      - name: Publish advisory coverage map
+        run: |
+          set +e
+          intent-verify map \
+            --spec AGENTS.md \
+            --repo . \
+            --section "What this tool does" \
+            --evidence-path src \
+            --evidence-path tests \
+            > "$RUNNER_TEMP/intent-coverage-map.json"
+          map_exit=$?
+          set -e
+          python -m intent_verify.summary \
+            --input "$RUNNER_TEMP/intent-coverage-map.json" \
+            --github-summary
+          case "$map_exit" in
+            0|1|2) ;;
+            *) exit "$map_exit" ;;
+          esac
