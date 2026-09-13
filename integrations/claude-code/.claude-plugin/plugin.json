@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "intent-verify",
+  "displayName": "intent-verify",
+  "description": "On-demand lexical coverage checks and explicit evidence maps for markdown specs and repositories.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Rolando Bosch",
+    "url": "https://github.com/hermes-labs-ai"
+  },
+  "homepage": "https://github.com/hermes-labs-ai/intent-verify",
+  "repository": "https://github.com/hermes-labs-ai/intent-verify",
+  "license": "MIT",
+  "keywords": ["spec-drift", "acceptance-criteria", "coverage", "developer-tools"]
+}

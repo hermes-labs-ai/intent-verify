@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "intent-verify",
+  "owner": {
+    "name": "Hermes Labs",
+    "url": "https://hermes-labs.ai"
+  },
+  "metadata": {
+    "description": "On-demand lexical coverage maps from markdown acceptance items to repository evidence."
+  },
+  "plugins": [
+    {
+      "name": "intent-verify",
+      "source": "./integrations/claude-code",
+      "description": "Run intent-verify check or map from Claude Code for an explicit spec and repository. Results are advisory lexical evidence, never acceptance authority.",
+      "homepage": "https://github.com/hermes-labs-ai/intent-verify",
+      "license": "MIT",
+      "category": "development"
+    }
+  ]
+}
