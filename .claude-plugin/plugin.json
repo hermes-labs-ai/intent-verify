@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "intent-verify",
+  "displayName": "intent-verify",
+  "description": "Map markdown acceptance items to explicit implementation evidence for advisory spec-drift checks.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Rolando Bosch",
+    "url": "https://github.com/hermes-labs-ai"
+  },
+  "homepage": "https://github.com/hermes-labs-ai/intent-verify",
+  "repository": "https://github.com/hermes-labs-ai/intent-verify",
+  "license": "MIT",
+  "keywords": ["spec-drift", "acceptance-criteria", "coverage", "developer-tools"]
+}

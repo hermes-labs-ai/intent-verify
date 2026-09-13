@@ -1,0 +1,5 @@
+{
+  "name": "intent-verify",
+  "version": "0.2.0",
+  "description": "Map markdown acceptance items to explicit implementation evidence for advisory spec-drift checks."
+}
