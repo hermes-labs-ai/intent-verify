@@ -74,6 +74,23 @@ Pin the full release commit when your supply-chain policy requires it. Upload
 the path returned by the Action's `receipt` output when the JSON should remain
 as a build artifact.
 
+### Claude Code
+
+The repository is also a Claude Code plugin marketplace. It adds two on-demand
+commands around the installed CLI:
+
+```bash
+claude plugin marketplace add hermes-labs-ai/intent-verify
+claude plugin install intent-verify@intent-verify
+```
+
+Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
+check, or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src`
+to emit a provenance map for explicit implementation roots. Both commands use
+the local `intent-verify` CLI, require version 0.2.0 or newer, and run only when
+you invoke them. Their results remain advisory lexical evidence: `covered` and
+`verified` do not authorize acceptance, merge, release, or publication.
+
 ## Install
 
 ```bash
