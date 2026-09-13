@@ -91,3 +91,48 @@ def test_summary_escapes_and_bounds_untrusted_labels():
 def test_summary_rejects_malformed_or_authoritative_payloads(payload):
     with pytest.raises(SummaryPayloadError):
         parse_coverage_map(payload)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        coverage_map(files_scanned=True),
+        coverage_map(average_coverage=True),
+        coverage_map(average_coverage=float("nan")),
+        coverage_map(average_coverage=10**100),
+        coverage_map(average_coverage=10**4000),
+        coverage_map(
+            items=[
+                {
+                    "text": "Valid label",
+                    "coverage": True,
+                    "verdict": "covered",
+                    "evidence_paths": [],
+                }
+            ]
+        ),
+        coverage_map(
+            items=[
+                {
+                    "text": "Valid label",
+                    "coverage": float("inf"),
+                    "verdict": "covered",
+                    "evidence_paths": [],
+                }
+            ]
+        ),
+        coverage_map(
+            items=[
+                {
+                    "text": "Valid label",
+                    "coverage": 10**4000,
+                    "verdict": "covered",
+                    "evidence_paths": [],
+                }
+            ]
+        ),
+    ],
+)
+def test_summary_rejects_boolean_non_finite_and_out_of_range_coverage(payload):
+    with pytest.raises(SummaryPayloadError):
+        parse_coverage_map(json.dumps(payload))

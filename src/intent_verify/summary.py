@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -60,6 +61,21 @@ def _as_list(value: object, field: str) -> list[Any]:
     return value
 
 
+def _coverage_fraction(value: object, field: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise SummaryPayloadError(f"coverage-map {field} must be a number between 0 and 1")
+    if isinstance(value, int):
+        if not 0 <= value <= 1:
+            raise SummaryPayloadError(
+                f"coverage-map {field} must be a finite number between 0 and 1"
+            )
+        return float(value)
+    fraction = float(value)
+    if not math.isfinite(fraction) or not 0 <= fraction <= 1:
+        raise SummaryPayloadError(f"coverage-map {field} must be a finite number between 0 and 1")
+    return fraction
+
+
 def parse_coverage_map(raw: str) -> Mapping[str, Any]:
     try:
         payload = json.loads(raw)
@@ -77,10 +93,13 @@ def parse_coverage_map(raw: str) -> Mapping[str, Any]:
         raise SummaryPayloadError("coverage-map verdict is invalid")
     if payload.get("decision") not in {"review", "inspect"}:
         raise SummaryPayloadError("coverage-map decision is invalid")
-    if not isinstance(payload.get("files_scanned"), int) or payload["files_scanned"] < 0:
+    if (
+        isinstance(payload.get("files_scanned"), bool)
+        or not isinstance(payload.get("files_scanned"), int)
+        or payload["files_scanned"] < 0
+    ):
         raise SummaryPayloadError("coverage-map files_scanned must be a non-negative integer")
-    if not isinstance(payload.get("average_coverage"), (int, float)):
-        raise SummaryPayloadError("coverage-map average_coverage must be numeric")
+    _coverage_fraction(payload.get("average_coverage"), "average_coverage")
 
     _as_list(payload.get("evidence_roots"), "evidence_roots")
     items = _as_list(payload.get("items"), "items")
@@ -90,8 +109,7 @@ def parse_coverage_map(raw: str) -> Mapping[str, Any]:
             raise SummaryPayloadError("coverage-map item text must be a string")
         if item.get("verdict") not in _ITEM_VERDICTS:
             raise SummaryPayloadError("coverage-map item verdict is invalid")
-        if not isinstance(item.get("coverage"), (int, float)):
-            raise SummaryPayloadError("coverage-map item coverage must be numeric")
+        _coverage_fraction(item.get("coverage"), "item coverage")
         _as_list(item.get("evidence_paths"), "item evidence_paths")
     return payload
 
