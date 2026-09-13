@@ -100,6 +100,7 @@ def test_summary_rejects_malformed_or_authoritative_payloads(payload):
         coverage_map(average_coverage=True),
         coverage_map(average_coverage=float("nan")),
         coverage_map(average_coverage=10**100),
+        coverage_map(average_coverage=10**4000),
         coverage_map(
             items=[
                 {
@@ -115,6 +116,16 @@ def test_summary_rejects_malformed_or_authoritative_payloads(payload):
                 {
                     "text": "Valid label",
                     "coverage": float("inf"),
+                    "verdict": "covered",
+                    "evidence_paths": [],
+                }
+            ]
+        ),
+        coverage_map(
+            items=[
+                {
+                    "text": "Valid label",
+                    "coverage": 10**4000,
                     "verdict": "covered",
                     "evidence_paths": [],
                 }

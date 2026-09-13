@@ -64,6 +64,12 @@ def _as_list(value: object, field: str) -> list[Any]:
 def _coverage_fraction(value: object, field: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise SummaryPayloadError(f"coverage-map {field} must be a number between 0 and 1")
+    if isinstance(value, int):
+        if not 0 <= value <= 1:
+            raise SummaryPayloadError(
+                f"coverage-map {field} must be a finite number between 0 and 1"
+            )
+        return float(value)
     fraction = float(value)
     if not math.isfinite(fraction) or not 0 <= fraction <= 1:
         raise SummaryPayloadError(f"coverage-map {field} must be a finite number between 0 and 1")
