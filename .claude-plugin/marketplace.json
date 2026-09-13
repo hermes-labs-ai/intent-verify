@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "intent-verify",
-      "source": "./integrations/claude-code",
+      "source": ".",
       "description": "Run intent-verify check or map from Claude Code for an explicit spec and repository. Results are advisory lexical evidence, never acceptance authority.",
       "homepage": "https://github.com/hermes-labs-ai/intent-verify",
       "license": "MIT",

@@ -19,6 +19,12 @@ Command:
 - intent-verify check --spec INTENT.md --repo .
 - intent-verify check --spec SPEC.md --repo . --json
 
+Agent skill install (one canonical skills/intent-verify/SKILL.md):
+- Claude Code: claude plugin marketplace add hermes-labs-ai/intent-verify && claude plugin install intent-verify@intent-verify
+- Codex CLI: codex plugin marketplace add hermes-labs-ai/intent-verify && codex plugin add intent-verify@intent-verify
+- Gemini CLI: gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref main
+- skills.sh: npx skills add https://github.com/hermes-labs-ai/intent-verify --skill intent-verify
+
 Output:
 - Text verdict: verified, partial, or missing (exit codes 0, 1, 2).
 - JSON object with parsed items, tokens, and per-item coverage scores.

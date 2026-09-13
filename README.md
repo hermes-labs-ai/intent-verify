@@ -74,17 +74,34 @@ Pin the full release commit when your supply-chain policy requires it. Upload
 the path returned by the Action's `receipt` output when the JSON should remain
 as a build artifact.
 
-### Claude Code
+### Agent plugin (Claude Code, Codex CLI, Gemini CLI)
 
-The repository is also a Claude Code plugin marketplace. It adds two on-demand
-commands around the installed CLI:
+The repository root is one portable Agent Plugin (`plugin.json`, Agent Plugins
+1.0.0) with a single skill, `skills/intent-verify/SKILL.md`. Each host installs
+that same skill with its own native command; none of them gets a separate copy.
 
-```bash
-claude plugin marketplace add hermes-labs-ai/intent-verify
-claude plugin install intent-verify@intent-verify
-```
+| Host | Install | Read back |
+| --- | --- | --- |
+| Claude Code | `claude plugin marketplace add hermes-labs-ai/intent-verify`<br>`claude plugin install intent-verify@intent-verify` | `claude plugin list` |
+| OpenAI Codex CLI | `codex plugin marketplace add hermes-labs-ai/intent-verify`<br>`codex plugin add intent-verify@intent-verify` | `codex plugin list` |
+| Gemini CLI | `gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref main` | `gemini skills list` |
+| skills.sh | `npx skills add https://github.com/hermes-labs-ai/intent-verify --skill intent-verify` | `npx skills list` |
 
-Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
+What each host reads:
+
+- Claude Code reads `.claude-plugin/marketplace.json` (its entry is `.`, the
+  root) and `.claude-plugin/plugin.json`.
+- Codex reads the repo marketplace `.agents/plugins/marketplace.json` (its
+  entry is `./`, the root) and the portable `plugin.json`.
+- Gemini CLI reads `gemini-extension.json` and discovers the skill under
+  `skills/`. Keep `--ref main`: without a ref, Gemini CLI installs the latest
+  GitHub release archive, and releases up to v0.2.0 predate
+  `gemini-extension.json`.
+
+The skill uses an installed `intent-verify` CLI, or the pinned
+`uvx intent-verify==0.2.0` with your agreement.
+
+In Claude Code the plugin also adds two on-demand commands. Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
 check, or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src`
 to emit a provenance map for explicit implementation roots. Both commands use
 the local `intent-verify` CLI, require version 0.2.0 or newer, and run only when
@@ -206,6 +223,12 @@ python3 -m py_compile src/intent_verify/*.py
 src/intent_verify/
 tests/
 examples/
+skills/intent-verify/SKILL.md   canonical agent skill
+commands/                       Claude Code slash commands
+plugin.json                     portable Agent Plugins 1.0.0 manifest
+.claude-plugin/                 Claude Code plugin + marketplace
+.agents/plugins/marketplace.json Codex CLI marketplace
+gemini-extension.json           Gemini CLI extension
 ```
 
 ---
