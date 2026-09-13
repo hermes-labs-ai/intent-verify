@@ -22,12 +22,14 @@ release, or publication.
    roots from the whole repository, and do not scan a broad home directory.
    Confirm the spec is a file and that evidence paths are inside the named
    repository.
-3. Run exactly one command, keeping every user-supplied path or heading in
-   single quotes (for a literal single quote use `'\''`):
+3. Run exactly one command, replacing `<runner>` with the runner from step 1
+   (`intent-verify` or `uvx intent-verify==0.2.0`) and keeping every
+   user-supplied path or heading in single quotes (for a literal single quote
+   use `'\''`):
 
    ```bash
-   intent-verify check --spec '<spec-path>' --repo '<repo-path>'
-   intent-verify map --spec '<spec-path>' --repo '<repo-path>' --evidence-path '<source-or-test-path>'
+   <runner> check --spec '<spec-path>' --repo '<repo-path>'
+   <runner> map --spec '<spec-path>' --repo '<repo-path>' --evidence-path '<source-or-test-path>'
    ```
 
    Pass `--section '<heading>'` only when requested, `--json` on `check` only

@@ -128,7 +128,9 @@ def test_documented_gemini_install_pins_a_ref():
         commands = pattern.findall(doc.read_text(encoding="utf-8"))
         assert commands, f"{doc.name} no longer documents the Gemini install"
         for command in commands:
-            assert "--ref " in command, f"{doc.name}: {command!r} must pass --ref"
+            assert re.search(r"(?:^|\s)--ref(?:=|\s+)main(?:\s|$)", command), (
+                f"{doc.name}: {command!r} must pass --ref main"
+            )
 
 
 def _package(tmp_path: Path) -> Path:
