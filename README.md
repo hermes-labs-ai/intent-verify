@@ -70,9 +70,21 @@ immutable `v0.2.0` release:
       tests
 ```
 
-Pin the full release commit when your supply-chain policy requires it. Upload
-the path returned by the Action's `receipt` output when the JSON should remain
-as a build artifact.
+Pin the full release commit when your supply-chain policy requires it:
+
+```yaml
+- name: Map intent to changed implementation surfaces
+  uses: hermes-labs-ai/intent-verify@e048392dc45495c49df9be0545251d02de1f75fa # v0.2.0
+  with:
+    spec: INTENT.md
+    repo: .
+    evidence-paths: |
+      src
+      tests
+```
+
+Upload the path returned by the Action's `receipt` output when the JSON should
+remain as a build artifact.
 
 ### Agent plugin (Claude Code, Codex CLI, Gemini CLI)
 
