@@ -126,6 +126,12 @@ you invoke them. Their results remain advisory lexical evidence: `covered` and
 pip install intent-verify
 ```
 
+Or install the CLI from the [Hermes Labs Homebrew tap](https://github.com/hermes-labs-ai/homebrew-tap):
+
+```bash
+brew install hermes-labs-ai/tap/intent-verify
+```
+
 For local development:
 
 ```bash
