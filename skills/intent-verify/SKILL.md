@@ -12,8 +12,8 @@ release, or publication.
 
 1. Pick a runner. If `intent-verify --help` works, use the bare
    `intent-verify` command. Otherwise tell the user it is not installed and,
-   with their agreement, use `uvx intent-verify==0.2.0` (zero-install, no PATH
-   changes) or `python -m pip install 'intent-verify==0.2.0'`. Keep the exact
+   with their agreement, use `uvx intent-verify==0.2.1` (zero-install, no PATH
+   changes) or `python -m pip install 'intent-verify==0.2.1'`. Keep the exact
    version pin so neither fetches an unreviewed newer release, and keep using
    the runner you picked for the remaining steps.
 2. Require explicit inputs. `check` needs `--spec` and `--repo`; `map` also
@@ -23,7 +23,7 @@ release, or publication.
    Confirm the spec is a file and that evidence paths are inside the named
    repository.
 3. Run exactly one command, replacing `<runner>` with the runner from step 1
-   (`intent-verify` or `uvx intent-verify==0.2.0`) and keeping every
+   (`intent-verify` or `uvx intent-verify==0.2.1`) and keeping every
    user-supplied path or heading in single quotes (for a literal single quote
    use `'\''`):
 
