@@ -57,11 +57,11 @@ turning it into an always-on hook.
 ### GitHub Action
 
 The root composite Action applies the same contract. A workflow can use the
-immutable `v0.2.0` release:
+immutable `v0.2.1` release:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
-  uses: hermes-labs-ai/intent-verify@v0.2.0
+  uses: hermes-labs-ai/intent-verify@v0.2.1
   with:
     spec: INTENT.md
     repo: .
@@ -96,7 +96,7 @@ that same skill with its own native command; none of them gets a separate copy.
 | --- | --- | --- |
 | Claude Code | `claude plugin marketplace add hermes-labs-ai/intent-verify`<br>`claude plugin install intent-verify@intent-verify` | `claude plugin list` |
 | OpenAI Codex CLI | `codex plugin marketplace add hermes-labs-ai/intent-verify`<br>`codex plugin add intent-verify@intent-verify` | `codex plugin list` |
-| Gemini CLI | `gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref main` | `gemini skills list` |
+| Gemini CLI | `gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref v0.2.1` | `gemini skills list` |
 | skills.sh | `npx skills add https://github.com/hermes-labs-ai/intent-verify --skill intent-verify` | `npx skills list` |
 
 What each host reads:
@@ -106,12 +106,11 @@ What each host reads:
 - Codex reads the repo marketplace `.agents/plugins/marketplace.json` (its
   entry is `./`, the root) and the portable `plugin.json`.
 - Gemini CLI reads `gemini-extension.json` and discovers the skill under
-  `skills/`. Keep `--ref main`: without a ref, Gemini CLI installs the latest
-  GitHub release archive, and releases up to v0.2.0 predate
-  `gemini-extension.json`.
+  `skills/`. Keep `--ref v0.2.1` so installation resolves the reviewed semantic
+  release rather than a mutable branch.
 
 The skill uses an installed `intent-verify` CLI, or the pinned
-`uvx intent-verify==0.2.0` with your agreement.
+`uvx intent-verify==0.2.1` with your agreement.
 
 In Claude Code the plugin also adds two on-demand commands. Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
 check, or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src`

@@ -122,14 +122,16 @@ def test_claude_commands_live_in_the_root_plugin():
 
 
 def test_documented_gemini_install_pins_a_ref():
-    """An unpinned GitHub install takes the latest release, which predates the manifest."""
+    """The documented install resolves the reviewed semantic release."""
     pattern = re.compile(r"gemini extensions install https://github\.com/hermes-labs-ai/intent-verify[^\n`]*")
+    expected_ref = f"v{_pyproject_field('version')}"
     for doc in (ROOT / "README.md", ROOT / "llms.txt"):
         commands = pattern.findall(doc.read_text(encoding="utf-8"))
         assert commands, f"{doc.name} no longer documents the Gemini install"
         for command in commands:
-            assert re.search(r"(?:^|\s)--ref(?:=|\s+)main(?:\s|$)", command), (
-                f"{doc.name}: {command!r} must pass --ref main"
+            ref_pattern = rf"(?:^|\s)--ref(?:=|\s+){re.escape(expected_ref)}(?:\s|$)"
+            assert re.search(ref_pattern, command), (
+                f"{doc.name}: {command!r} must pass --ref {expected_ref}"
             )
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1] - 2026-09-19
+
+- Released the portable Agent Plugin surfaces for Claude Code, Codex CLI, and
+  Gemini CLI under one versioned repository root.
+- Added CodeMeta discovery metadata and a SHA-pinned GitHub Action example.
+- Aligned package, citation, plugin, Gemini, and CodeMeta version surfaces and
+  added a mechanical consistency test for future releases.
+
 ## 0.2.0 - 2026-09-05
 
 - Added the advisory `intent-verify map` contract for orchestration and CI.

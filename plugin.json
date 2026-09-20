@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "intent-verify",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Map markdown acceptance items to explicit implementation evidence for advisory spec-drift checks.",
   "author": {
     "name": "Rolando Bosch",
