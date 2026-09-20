@@ -8,6 +8,7 @@ from intent_verify import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
 def _project_version() -> str:
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     return pyproject["project"]["version"]
@@ -44,19 +45,10 @@ def test_release_version_surfaces_match():
         ".claude-plugin/plugin.json",
         "gemini-extension.json",
         "codemeta.json",
-        ".zenodo.json",
     )
     for relative_path in versioned_metadata:
         payload = json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
         assert payload["version"] == project_version, relative_path
-
-    zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
-    assert zenodo["upload_type"] == "software"
-    assert zenodo["related_identifiers"] == [{
-        "identifier": "10.5281/zenodo.19042469",
-        "relation": "references",
-        "scheme": "doi",
-    }]
 
     codemeta = json.loads((ROOT / "codemeta.json").read_text(encoding="utf-8"))
     expected_url = f"https://pypi.org/project/intent-verify/{project_version}/"

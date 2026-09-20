@@ -87,6 +87,10 @@ not grant acceptance authority: it reports lexical evidence only; review,
 tests, and human judgment still decide correctness and merge readiness. The
 `summary-written` output reports whether the requested summary was rendered.
 
+The repository retains `.zenodo.json` as passive metadata. Its listed DOI is a
+reference to the associated paper, not a software identity; Zenodo archiving is
+not a release prerequisite or a promised release side effect.
+
 ### Agent plugin (Claude Code, Codex CLI, Gemini CLI)
 
 The repository root is one portable Agent Plugin (`plugin.json`, Agent Plugins

@@ -7,8 +7,8 @@
 - Added CodeMeta discovery metadata for research-software indexing.
 - Aligned release metadata and documentation with the semantic `v0.2.1`
   boundary.
-- Updated the Zenodo software metadata for the `v0.2.1` deposition
-  configuration; the related paper DOI remains a reference, not a software DOI.
+- Retained passive Zenodo metadata; its related paper DOI remains a reference,
+  not a software identity or release prerequisite.
 
 ## 0.2.0 - 2026-09-05
 
