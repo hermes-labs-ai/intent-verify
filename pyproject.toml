@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "intent-verify"
 version = "0.2.1"
-description = "Map markdown acceptance items to explicit implementation evidence for advisory spec-drift checks."
+description = "Compare markdown acceptance items with repository lexical evidence for advisory spec-drift review."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

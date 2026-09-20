@@ -8,11 +8,6 @@ from intent_verify import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Zenodo is intentionally held at the prior deposition version until
-# publication; it is not a v0.2.1 release-alignment surface.
-INTENTIONALLY_HELD_METADATA = {".zenodo.json"}
-
-
 def _project_version() -> str:
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     return pyproject["project"]["version"]
@@ -32,16 +27,36 @@ def test_release_version_surfaces_match():
         re.MULTILINE,
     )
 
+    release_date = re.search(
+        rf"^## \[{re.escape(project_version)}\] - (\d{{4}}-\d{{2}}-\d{{2}})$",
+        changelog,
+        re.MULTILINE,
+    )
+    assert release_date
+    assert re.search(
+        rf'^date-released: "{re.escape(release_date.group(1))}"$',
+        citation,
+        re.MULTILINE,
+    )
+
     versioned_metadata = (
         "plugin.json",
         ".claude-plugin/plugin.json",
         "gemini-extension.json",
         "codemeta.json",
+        ".zenodo.json",
     )
-    assert INTENTIONALLY_HELD_METADATA.isdisjoint(versioned_metadata)
     for relative_path in versioned_metadata:
         payload = json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
         assert payload["version"] == project_version, relative_path
+
+    zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
+    assert zenodo["upload_type"] == "software"
+    assert zenodo["related_identifiers"] == [{
+        "identifier": "10.5281/zenodo.19042469",
+        "relation": "references",
+        "scheme": "doi",
+    }]
 
     codemeta = json.loads((ROOT / "codemeta.json").read_text(encoding="utf-8"))
     expected_url = f"https://pypi.org/project/intent-verify/{project_version}/"

@@ -4,15 +4,22 @@
 [![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-intent-verify is a deterministic, zero-LLM coverage mapper for markdown specs,
-`INTENT.md` files, and handoff documents. Its orchestration contract maps each
-acceptance item to explicit implementation files and returns `covered`,
-`partial`, or `gap` with provenance.
+When a written acceptance list may have drifted from a changed repository,
+intent-verify provides a fast, deterministic lexical coverage signal before
+human review. Give it the Markdown spec you maintain—an `INTENT.md`, `SPEC.md`,
+requirements list, or handoff document—and it reports whether the selected
+repository evidence visibly uses the same terms.
 
-Use it after code changes and before review when you need to see whether stated
-scope is visibly represented in the exact source and test roots you name. A gap
-can stop a claim that scope is covered. A covered result sends work to review;
-it never authorizes acceptance, merge, or release.
+Use `check` for a repository-wide signal, or `map` when you need each
+acceptance item tied to explicit source and test roots. A gap can stop a claim
+that scope is covered. A covered result sends work to review; it never
+authorizes acceptance, merge, release, or publication.
+
+`INTENT.md` is an input-file example, not an integration point. Claude Code's
+project-instruction documentation describes `CLAUDE.md` and `AGENTS.md`; this
+tool does not load either automatically and only reads the file passed to
+`--spec`. See Anthropic's [project memory documentation](https://code.claude.com/docs/en/memory)
+for how Claude Code handles those instruction files.
 
 ## How it works
 
@@ -49,10 +56,6 @@ gap results.
 | `covered` | `0` | Continue to tests and review; do not accept automatically. |
 | `partial` | `1` | Inspect the weak items before claiming scope coverage. |
 | `gap` | `2` | Stop the scope-covered claim and inspect missing evidence. |
-
-For Hermes Cloud Lane packets, pass the map command through the existing
-`--verify` field. This keeps the signal post-change and explicit instead of
-turning it into an always-on hook.
 
 ### GitHub Action
 
@@ -95,7 +98,6 @@ that same skill with its own native command; none of them gets a separate copy.
 | Claude Code | `claude plugin marketplace add hermes-labs-ai/intent-verify`<br>`claude plugin install intent-verify@intent-verify` | `claude plugin list` |
 | OpenAI Codex CLI | `codex plugin marketplace add hermes-labs-ai/intent-verify`<br>`codex plugin add intent-verify@intent-verify` | `codex plugin list` |
 | Gemini CLI | `gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref v0.2.1` | `gemini skills list` |
-| skills.sh | `npx skills add https://github.com/hermes-labs-ai/intent-verify --skill intent-verify` | `npx skills list` |
 
 What each host reads:
 
@@ -110,12 +112,13 @@ What each host reads:
 The skill uses an installed `intent-verify` CLI, or the pinned
 `uvx intent-verify==0.2.1` with your agreement.
 
-In Claude Code the plugin also adds two on-demand commands. Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
-check, or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src`
-to emit a provenance map for explicit implementation roots. Both commands use
-the local `intent-verify` CLI, require version 0.2.0 or newer, and run only when
-you invoke them. Their results remain advisory lexical evidence: `covered` and
-`verified` do not authorize acceptance, merge, release, or publication.
+In Claude Code the plugin also adds two on-demand commands. Use
+`/intent-verify:check --spec INTENT.md --repo .` for a normal coverage check,
+or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src` to emit a
+provenance map for explicit implementation roots. Both commands use the local
+`intent-verify` CLI and run only when you invoke them. Their results remain
+advisory lexical evidence: `covered` and `verified` do not authorize
+acceptance, merge, release, or publication.
 
 ## Install
 
