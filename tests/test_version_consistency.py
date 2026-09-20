@@ -64,9 +64,14 @@ def test_public_release_pins_use_project_version():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     skill = (ROOT / "skills" / "intent-verify" / "SKILL.md").read_text(encoding="utf-8")
+    commands = [
+        (ROOT / "commands" / "check.md").read_text(encoding="utf-8"),
+        (ROOT / "commands" / "map.md").read_text(encoding="utf-8"),
+    ]
 
     assert f"hermes-labs-ai/intent-verify@{release_tag}" in readme
     for document in (readme, llms):
         assert f"--ref {release_tag}" in document
     assert readme.count(exact_pip_pin) >= 1
     assert skill.count(exact_pip_pin) >= 2
+    assert all(exact_pip_pin in command for command in commands)
