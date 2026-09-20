@@ -39,6 +39,8 @@ def test_release_version_surfaces_match():
         citation,
         re.MULTILINE,
     )
+    assert 'title: "A Taxonomy of Epistemic Failure Modes in Large Language Models"' in citation
+    assert 'doi: "10.5281/zenodo.19042469"' in citation
 
     versioned_metadata = (
         "plugin.json",
