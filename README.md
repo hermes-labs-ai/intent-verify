@@ -61,7 +61,7 @@ immutable `v0.2.0` release:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
-  uses: hermes-labs-ai/intent-verify@v0.2.0
+  uses: hermes-labs-ai/intent-verify@c743f9c87adbc899f32455946d58829977af9d56 # opt-in summary support
   with:
     spec: INTENT.md
     repo: .
@@ -71,7 +71,8 @@ immutable `v0.2.0` release:
     summary: true # optional; defaults to false
 ```
 
-Pin the full release commit when your supply-chain policy requires it:
+The example above pins the tested commit that adds summary support. For the
+older v0.2.0 release without this input, use:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
