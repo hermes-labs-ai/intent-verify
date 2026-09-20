@@ -56,8 +56,8 @@ turning it into an always-on hook.
 
 ### GitHub Action
 
-The root composite Action applies the same contract. A workflow can use the
-immutable `v0.2.1` release:
+The root composite Action applies the same contract. A workflow can target the
+planned versioned `v0.2.1` release:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
@@ -71,8 +71,8 @@ immutable `v0.2.1` release:
     summary: true # optional; defaults to false
 ```
 
-When your supply-chain policy requires a full commit pin, replace `v0.2.1`
-with the commit resolved from the accepted `v0.2.1` tag after publication.
+After the `v0.2.1` tag is published, resolve it to its commit SHA when your
+supply-chain policy requires a full commit pin.
 
 Upload the path returned by the Action's `receipt` output when the JSON should
 remain as a build artifact.

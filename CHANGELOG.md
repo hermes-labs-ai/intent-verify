@@ -7,6 +7,8 @@
 - Added CodeMeta discovery metadata for research-software indexing.
 - Aligned release metadata and documentation with the semantic `v0.2.1`
   boundary.
+- Kept `.zenodo.json` unchanged and outside this pre-publication alignment;
+  it remains held for the eventual deposition.
 
 ## 0.2.0 - 2026-09-05
 

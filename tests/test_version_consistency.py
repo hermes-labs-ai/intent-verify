@@ -8,6 +8,10 @@ from intent_verify import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Zenodo is intentionally held at the prior deposition version until
+# publication; it is not a v0.2.1 release-alignment surface.
+INTENTIONALLY_HELD_METADATA = {".zenodo.json"}
+
 
 def _project_version() -> str:
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
@@ -34,6 +38,7 @@ def test_release_version_surfaces_match():
         "gemini-extension.json",
         "codemeta.json",
     )
+    assert INTENTIONALLY_HELD_METADATA.isdisjoint(versioned_metadata)
     for relative_path in versioned_metadata:
         payload = json.loads((ROOT / relative_path).read_text(encoding="utf-8"))
         assert payload["version"] == project_version, relative_path
