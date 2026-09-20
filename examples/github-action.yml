@@ -8,9 +8,12 @@ jobs:
   verify-intent:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Map intent to implementation evidence
+        uses: hermes-labs-ai/intent-verify@88f241112218434bad24fe562cbf3bee0eab05ba # hardened current main
         with:
-          python-version: "3.11"
-      - run: pip install intent-verify
-      - run: intent-verify check --spec INTENT.md --repo .
+          spec: INTENT.md
+          repo: .
+          evidence-paths: |
+            src
+            tests

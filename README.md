@@ -59,12 +59,13 @@ gap results.
 
 ### GitHub Action
 
-The root composite Action applies the same contract. A workflow can target the
-planned versioned `v0.2.1` release:
+The root composite Action applies the same contract. The versioned release is
+`hermes-labs-ai/intent-verify@v0.2.1`, but that tag predates the dependency
+hardening below, so use the exact hardened commit:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
-  uses: hermes-labs-ai/intent-verify@v0.2.1
+  uses: hermes-labs-ai/intent-verify@88f241112218434bad24fe562cbf3bee0eab05ba # hardened current main
   with:
     spec: INTENT.md
     repo: .
@@ -74,8 +75,8 @@ planned versioned `v0.2.1` release:
     summary: true # optional; defaults to false
 ```
 
-After the `v0.2.1` tag is published, resolve it to its commit SHA when your
-supply-chain policy requires a full commit pin.
+That commit contains the immutable third-party Action reference used by the
+composite Action itself.
 
 Upload the path returned by the Action's `receipt` output when the JSON should
 remain as a build artifact.
