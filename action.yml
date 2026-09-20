@@ -28,6 +28,12 @@ inputs:
     description: Per-item lexical coverage below which the result is a gap.
     required: false
     default: "0.3"
+  summary:
+    description: >-
+      Write an opt-in bounded advisory coverage summary to the GitHub Actions job
+      summary. Set to "true" to enable; spec labels may be sensitive.
+    required: false
+    default: "false"
 
 outputs:
   verdict:
@@ -39,6 +45,9 @@ outputs:
   receipt:
     description: Absolute path to the JSON coverage-map receipt.
     value: ${{ steps.map.outputs.receipt }}
+  summary-written:
+    description: Whether this invocation wrote the opt-in GitHub Actions summary.
+    value: ${{ steps.map.outputs.summary-written }}
 
 runs:
   using: composite
@@ -60,6 +69,7 @@ runs:
         IV_SECTION: ${{ inputs.section }}
         IV_MIN_COVERED: ${{ inputs.min-covered }}
         IV_MIN_ITEM: ${{ inputs.min-item }}
+        IV_SUMMARY: ${{ inputs.summary }}
       run: |
         receipt="$RUNNER_TEMP/intent-verify-coverage-map.json"
         args=(
@@ -92,5 +102,14 @@ runs:
         echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
         echo "decision=$decision" >> "$GITHUB_OUTPUT"
         echo "receipt=$receipt" >> "$GITHUB_OUTPUT"
+        summary_written=false
+        if [[ "$IV_SUMMARY" == "true" ]]; then
+          if ! python -m intent_verify.summary --input "$receipt" --github-summary; then
+            echo "intent-verify: requested job summary could not be rendered" >&2
+            exit 2
+          fi
+          summary_written=true
+        fi
+        echo "summary-written=$summary_written" >> "$GITHUB_OUTPUT"
         cat "$receipt"
         exit "$map_exit"

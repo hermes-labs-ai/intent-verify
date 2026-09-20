@@ -32,6 +32,7 @@ jobs:
           spec: tests/fixtures/repo_ok/INTENT.md
           repo: tests/fixtures/repo_ok
           evidence-paths: src
+          summary: true
       - name: Partial fixture
         id: partial
         continue-on-error: true
@@ -53,18 +54,24 @@ jobs:
           COVERED_OUTCOME: ${{ steps.covered.outcome }}
           COVERED_VERDICT: ${{ steps.covered.outputs.verdict }}
           COVERED_DECISION: ${{ steps.covered.outputs.decision }}
+          COVERED_SUMMARY_WRITTEN: ${{ steps.covered.outputs.summary-written }}
           PARTIAL_OUTCOME: ${{ steps.partial.outcome }}
           PARTIAL_VERDICT: ${{ steps.partial.outputs.verdict }}
+          PARTIAL_SUMMARY_WRITTEN: ${{ steps.partial.outputs.summary-written }}
           GAP_OUTCOME: ${{ steps.gap.outcome }}
           GAP_VERDICT: ${{ steps.gap.outputs.verdict }}
+          GAP_SUMMARY_WRITTEN: ${{ steps.gap.outputs.summary-written }}
         run: |
           test "$COVERED_OUTCOME" = success
           test "$COVERED_VERDICT" = covered
           test "$COVERED_DECISION" = review
+          test "$COVERED_SUMMARY_WRITTEN" = true
           test "$PARTIAL_OUTCOME" = failure
           test "$PARTIAL_VERDICT" = partial
+          test "$PARTIAL_SUMMARY_WRITTEN" = false
           test "$GAP_OUTCOME" = failure
           test "$GAP_VERDICT" = gap
+          test "$GAP_SUMMARY_WRITTEN" = false
 
   advisory-coverage-map:
     runs-on: ubuntu-latest

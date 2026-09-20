@@ -68,6 +68,7 @@ immutable `v0.2.0` release:
     evidence-paths: |
       src
       tests
+    summary: true # optional; defaults to false
 ```
 
 Pin the full release commit when your supply-chain policy requires it:
@@ -85,6 +86,13 @@ Pin the full release commit when your supply-chain policy requires it:
 
 Upload the path returned by the Action's `receipt` output when the JSON should
 remain as a build artifact.
+
+Set `summary: true` to add a bounded, escaped advisory coverage table to the
+GitHub Actions job summary. It includes the caller's spec path and acceptance
+item labels, so leave it off when those labels are sensitive. The summary does
+not grant acceptance authority: it reports lexical evidence only; review,
+tests, and human judgment still decide correctness and merge readiness. The
+`summary-written` output reports whether the requested summary was rendered.
 
 ### Agent plugin (Claude Code, Codex CLI, Gemini CLI)
 
