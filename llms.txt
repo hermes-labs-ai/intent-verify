@@ -30,6 +30,7 @@ Agent skill install (one canonical skills/intent-verify/SKILL.md):
 - Claude Code: claude plugin marketplace add hermes-labs-ai/intent-verify && claude plugin install intent-verify@intent-verify
 - Codex CLI: codex plugin marketplace add hermes-labs-ai/intent-verify && codex plugin add intent-verify@intent-verify
 - Gemini CLI: gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref v0.2.1
+- skills.sh: npx skills add https://github.com/hermes-labs-ai/intent-verify#v0.2.1 --skill intent-verify
 
 Output:
 - Text and JSON output are available for `check`; `map` produces the versioned JSON coverage-map contract.

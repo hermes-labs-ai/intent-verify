@@ -59,8 +59,8 @@ gap results.
 
 ### GitHub Action
 
-The root composite Action applies the same contract. A workflow can target the
-planned versioned `v0.2.1` release:
+The root composite Action applies the same contract. A workflow can use the
+versioned `v0.2.1` tag:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
@@ -102,6 +102,7 @@ that same skill with its own native command; none of them gets a separate copy.
 | Claude Code | `claude plugin marketplace add hermes-labs-ai/intent-verify`<br>`claude plugin install intent-verify@intent-verify` | `claude plugin list` |
 | OpenAI Codex CLI | `codex plugin marketplace add hermes-labs-ai/intent-verify`<br>`codex plugin add intent-verify@intent-verify` | `codex plugin list` |
 | Gemini CLI | `gemini extensions install https://github.com/hermes-labs-ai/intent-verify --ref v0.2.1` | `gemini skills list` |
+| skills.sh | `npx skills add https://github.com/hermes-labs-ai/intent-verify#v0.2.1 --skill intent-verify` | `npx skills list` |
 
 What each host reads:
 
