@@ -2,7 +2,7 @@
   "@context": "https://w3id.org/codemeta/3.1",
   "@type": "SoftwareSourceCode",
   "name": "intent-verify",
-  "description": "Deterministic, zero-LLM spec-drift checker that maps markdown acceptance items to lexical evidence in a codebase and returns verified, partial, or missing coverage.",
+  "description": "Deterministic, zero-LLM CLI for advisory spec-drift checks. It compares markdown acceptance items with repository lexical evidence: check returns verified, partial, or missing; map scopes explicit evidence paths and returns covered, partial, or gap JSON.",
   "codeRepository": "https://github.com/hermes-labs-ai/intent-verify",
   "version": "0.2.1",
   "license": "https://spdx.org/licenses/MIT",

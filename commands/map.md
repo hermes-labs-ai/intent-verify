@@ -28,5 +28,5 @@ public effect.
    items that need inspection. Do not treat any verdict as behavioral proof.
 
 If `intent-verify` is unavailable, say so and give the user the local install
-command `python -m pip install 'intent-verify>=0.2.0'`; do not install it unless
+command `python -m pip install 'intent-verify==0.2.1'`; do not install it unless
 the user asks.

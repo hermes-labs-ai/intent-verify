@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "intent-verify",
   "displayName": "intent-verify",
-  "description": "Map markdown acceptance items to explicit implementation evidence for advisory spec-drift checks.",
+  "description": "Compare markdown acceptance items with repository lexical evidence for advisory spec-drift review.",
   "version": "0.2.1",
   "author": {
     "name": "Rolando Bosch",

@@ -14,7 +14,7 @@ date-released: "2026-09-19"
 repository-code: "https://github.com/hermes-labs-ai/intent-verify"
 references:
   - type: article
-    title: "A Taxonomy of Epistemic Failure Modes in LLMs"
+    title: "A Taxonomy of Epistemic Failure Modes in Large Language Models"
     authors:
       - family-names: "Bosch Rodriguez"
         given-names: "Rolando"

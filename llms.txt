@@ -1,11 +1,12 @@
 intent-verify
 
 Summary:
-- intent-verify is a deterministic, zero-LLM CLI that checks whether a repo's source still lexically covers the acceptance items in a markdown spec, INTENT.md, or handoff doc.
+- intent-verify is a deterministic, zero-LLM CLI for the problem of checking whether a changed repository still visibly covers a written acceptance list.
+- It reads only the Markdown file named by `--spec` (for example `INTENT.md`, `SPEC.md`, requirements, or a handoff document); it does not load agent instruction files automatically.
 
 Use when:
-- The repo has INTENT.md, SPEC.md, requirements, or handoff docs.
-- You want a quick spec-drift or handoff check before review, release, or merge.
+- A maintained Markdown acceptance list may have drifted from a repository.
+- You need an advisory spec-drift or handoff check before human review.
 
 Do not use when:
 - You need semantic verification of behavior.
@@ -18,6 +19,12 @@ How it works:
 Command:
 - intent-verify check --spec INTENT.md --repo .
 - intent-verify check --spec SPEC.md --repo . --json
+- intent-verify map --spec INTENT.md --repo . --evidence-path src --evidence-path tests
+
+Input and output contract:
+- `check` scans the repository and returns `verified`, `partial`, or `missing` (exit 0, 1, or 2). Its JSON mode includes parsed items, token coverage, contributing paths, and `acceptance_authority: false`.
+- `map` requires one or more explicit `--evidence-path` values. It emits only `intent-verify.coverage-map.v1` JSON and returns `covered`, `partial`, or `gap` (exit 0, 1, or 2). Its `decision` is `review` only for `covered`, otherwise `inspect`.
+- Every result is lexical evidence for review, never behavioral proof or authority to accept, merge, release, or publish.
 
 Agent skill install (one canonical skills/intent-verify/SKILL.md):
 - Claude Code: claude plugin marketplace add hermes-labs-ai/intent-verify && claude plugin install intent-verify@intent-verify
@@ -26,12 +33,11 @@ Agent skill install (one canonical skills/intent-verify/SKILL.md):
 - skills.sh: npx skills add https://github.com/hermes-labs-ai/intent-verify --skill intent-verify
 
 Output:
-- Text verdict: verified, partial, or missing (exit codes 0, 1, 2).
-- JSON object with parsed items, tokens, and per-item coverage scores.
+- Text and JSON output are available for `check`; `map` produces the versioned JSON coverage-map contract.
 
 Limits:
 - Lexical matching only; can over-credit incidental token overlap and under-credit valid implementations that use different wording.
-- Not a substitute for tests or code review.
+- Not a substitute for tests, code review, or a decision about whether a change is correct.
 
 Part of the Hermes Labs reliability stack: https://github.com/hermes-labs-ai
 

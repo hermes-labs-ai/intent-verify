@@ -2,11 +2,13 @@
 
 ## [0.2.1] - 2026-09-19
 
-- Released the portable Agent Plugin surfaces for Claude Code, Codex CLI, and
-  Gemini CLI under one versioned repository root.
-- Added CodeMeta discovery metadata and a SHA-pinned GitHub Action example.
-- Aligned package, citation, plugin, Gemini, and CodeMeta version surfaces and
-  added a mechanical consistency test for future releases.
+- Packaged the repository root as one portable Agent Plugin surface for Claude
+  Code, Codex CLI, and Gemini CLI, with one canonical skill.
+- Added CodeMeta discovery metadata for research-software indexing.
+- Aligned release metadata and documentation with the semantic `v0.2.1`
+  boundary.
+- Retained passive Zenodo metadata; its related paper DOI remains a reference,
+  not a software identity or release prerequisite.
 
 ## 0.2.0 - 2026-09-05
 

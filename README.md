@@ -4,15 +4,22 @@
 [![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-intent-verify is a deterministic, zero-LLM coverage mapper for markdown specs,
-`INTENT.md` files, and handoff documents. Its orchestration contract maps each
-acceptance item to explicit implementation files and returns `covered`,
-`partial`, or `gap` with provenance.
+When a written acceptance list may have drifted from a changed repository,
+intent-verify provides a fast, deterministic lexical coverage signal before
+human review. Give it the Markdown spec you maintain—an `INTENT.md`, `SPEC.md`,
+requirements list, or handoff document—and it reports whether the selected
+repository evidence visibly uses the same terms.
 
-Use it after code changes and before review when you need to see whether stated
-scope is visibly represented in the exact source and test roots you name. A gap
-can stop a claim that scope is covered. A covered result sends work to review;
-it never authorizes acceptance, merge, or release.
+Use `check` for a repository-wide signal, or `map` when you need each
+acceptance item tied to explicit source and test roots. A gap can stop a claim
+that scope is covered. A covered result sends work to review; it never
+authorizes acceptance, merge, release, or publication.
+
+`INTENT.md` is an input-file example, not an integration point. Claude Code's
+project-instruction documentation describes `CLAUDE.md` and `AGENTS.md`; this
+tool does not load either automatically and only reads the file passed to
+`--spec`. See Anthropic's [project memory documentation](https://code.claude.com/docs/en/memory)
+for how Claude Code handles those instruction files.
 
 ## How it works
 
@@ -50,14 +57,10 @@ gap results.
 | `partial` | `1` | Inspect the weak items before claiming scope coverage. |
 | `gap` | `2` | Stop the scope-covered claim and inspect missing evidence. |
 
-For Hermes Cloud Lane packets, pass the map command through the existing
-`--verify` field. This keeps the signal post-change and explicit instead of
-turning it into an always-on hook.
-
 ### GitHub Action
 
 The root composite Action applies the same contract. A workflow can use the
-immutable `v0.2.1` release:
+versioned `v0.2.1` tag:
 
 ```yaml
 - name: Map intent to changed implementation surfaces
@@ -68,23 +71,25 @@ immutable `v0.2.1` release:
     evidence-paths: |
       src
       tests
+    summary: true # optional; defaults to false
 ```
 
-Pin the full release commit when your supply-chain policy requires it:
-
-```yaml
-- name: Map intent to changed implementation surfaces
-  uses: hermes-labs-ai/intent-verify@e048392dc45495c49df9be0545251d02de1f75fa # v0.2.0
-  with:
-    spec: INTENT.md
-    repo: .
-    evidence-paths: |
-      src
-      tests
-```
+After the `v0.2.1` tag is published, resolve it to its commit SHA when your
+supply-chain policy requires a full commit pin.
 
 Upload the path returned by the Action's `receipt` output when the JSON should
 remain as a build artifact.
+
+Set `summary: true` to add a bounded, escaped advisory coverage table to the
+GitHub Actions job summary. It includes the caller's spec path and acceptance
+item labels, so leave it off when those labels are sensitive. The summary does
+not grant acceptance authority: it reports lexical evidence only; review,
+tests, and human judgment still decide correctness and merge readiness. The
+`summary-written` output reports whether the requested summary was rendered.
+
+The repository retains `.zenodo.json` as passive metadata. Its listed DOI is a
+reference to the associated paper, not a software identity; Zenodo archiving is
+not a release prerequisite or a promised release side effect.
 
 ### Agent plugin (Claude Code, Codex CLI, Gemini CLI)
 
@@ -112,17 +117,24 @@ What each host reads:
 The skill uses an installed `intent-verify` CLI, or the pinned
 `uvx intent-verify==0.2.1` with your agreement.
 
-In Claude Code the plugin also adds two on-demand commands. Use `/intent-verify:check --spec INTENT.md --repo .` for a normal coverage
-check, or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src`
-to emit a provenance map for explicit implementation roots. Both commands use
-the local `intent-verify` CLI, require version 0.2.0 or newer, and run only when
-you invoke them. Their results remain advisory lexical evidence: `covered` and
-`verified` do not authorize acceptance, merge, release, or publication.
+In Claude Code the plugin also adds two on-demand commands. Use
+`/intent-verify:check --spec INTENT.md --repo .` for a normal coverage check,
+or `/intent-verify:map --spec INTENT.md --repo . --evidence-path src` to emit a
+provenance map for explicit implementation roots. Both commands use the local
+`intent-verify` CLI and run only when you invoke them. Their results remain
+advisory lexical evidence: `covered` and `verified` do not authorize
+acceptance, merge, release, or publication.
 
 ## Install
 
 ```bash
 pip install intent-verify
+```
+
+Or install the CLI from the [Hermes Labs Homebrew tap](https://github.com/hermes-labs-ai/homebrew-tap):
+
+```bash
+brew install hermes-labs-ai/tap/intent-verify
 ```
 
 For local development:
