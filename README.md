@@ -4,11 +4,13 @@
 [![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-When a written acceptance list may have drifted from a changed repository,
-intent-verify provides a fast, deterministic lexical coverage signal before
-human review. Give it the Markdown spec you maintain—an `INTENT.md`, `SPEC.md`,
-requirements list, or handoff document—and it reports whether the selected
-repository evidence visibly uses the same terms.
+intent-verify deterministically checks whether a repository still lexically covers the acceptance items in a Markdown spec before human review.
+
+intent-verify is developed by [Hermes Labs](https://hermes-labs.ai).
+
+Hermes Labs studies failure modes in agent and LLM systems, develops open-source tools that treat language as part of the runtime, and works with teams to remediate reliability failures in production.
+
+Give it an `INTENT.md`, `SPEC.md`, requirements list, or handoff document, and it reports whether the selected repository evidence visibly uses the same terms.
 
 Use `check` for a repository-wide signal, or `map` when you need each
 acceptance item tied to explicit source and test roots. A gap can stop a claim
@@ -260,6 +262,6 @@ Part of the [Hermes Labs reliability stack](https://github.com/hermes-labs-ai). 
 
 ## About Hermes Labs
 
-[Hermes Labs](https://hermes-labs.ai) is an AI reliability engineering studio for product and engineering teams shipping production agents and LLM applications. We find the structural AI failures standard evals miss, then harden retrieval, memory, agents, and the language layers around production AI systems with runtime controls and defensible evidence.
+Hermes Labs studies failure modes in agent and LLM systems, develops open-source tools that treat language as part of the runtime, and works with teams to remediate reliability failures in production.
 
 Browse the [open-source catalog](https://hermes-labs.ai/open-source) or contact [roli@hermes-labs.ai](mailto:roli@hermes-labs.ai).
