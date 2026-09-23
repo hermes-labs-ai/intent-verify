@@ -1,14 +1,18 @@
-# intent-verify
+<div align="center">
 
-[![CI](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml/badge.svg)](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<h1>intent-verify</h1>
 
 intent-verify deterministically checks whether a repository still lexically covers the acceptance items in a Markdown spec before human review.
 
 intent-verify is developed by [Hermes Labs](https://hermes-labs.ai).
 
-Hermes Labs studies failure modes in agent and LLM systems, develops open-source tools that treat language as part of the runtime, and works with teams to remediate reliability failures in production.
+Hermes Labs is an agentic infrastructure company building the reliability layer for autonomous systems.
+
+[![CI](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml/badge.svg)](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+</div>
 
 Give it an `INTENT.md`, `SPEC.md`, requirements list, or handoff document, and it reports whether the selected repository evidence visibly uses the same terms.
 
@@ -262,6 +266,6 @@ Part of the [Hermes Labs reliability stack](https://github.com/hermes-labs-ai). 
 
 ## About Hermes Labs
 
-Hermes Labs studies failure modes in agent and LLM systems, develops open-source tools that treat language as part of the runtime, and works with teams to remediate reliability failures in production.
+Hermes Labs is an agentic infrastructure company building the reliability layer for autonomous systems.
 
 Browse the [open-source catalog](https://hermes-labs.ai/open-source) or contact [roli@hermes-labs.ai](mailto:roli@hermes-labs.ai).
