@@ -27,6 +27,9 @@ classifiers = [
 [project.scripts]
 intent-verify = "intent_verify.cli:main"
 
+[project.entry-points."hermes_agent.plugins"]
+intent_verify = "intent_verify.hermes_agent"
+
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.5"]
 
