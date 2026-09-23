@@ -76,8 +76,8 @@ versioned `v0.2.1` tag:
     summary: true # optional; defaults to false
 ```
 
-After the `v0.2.1` tag is published, resolve it to its commit SHA when your
-supply-chain policy requires a full commit pin.
+Resolve the tag to its commit SHA when your supply-chain policy requires a
+full commit pin.
 
 Upload the path returned by the Action's `receipt` output when the JSON should
 remain as a build artifact.
