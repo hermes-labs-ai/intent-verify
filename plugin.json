@@ -9,6 +9,6 @@
   },
   "homepage": "https://github.com/hermes-labs-ai/intent-verify",
   "repository": "https://github.com/hermes-labs-ai/intent-verify",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": ["spec-drift", "acceptance-criteria", "coverage", "developer-tools"]
 }

@@ -5,7 +5,7 @@
   "description": "Deterministic, zero-LLM CLI for advisory spec-drift checks. It compares markdown acceptance items with repository lexical evidence: check returns verified, partial, or missing; map scopes explicit evidence paths and returns covered, partial, or gap JSON.",
   "codeRepository": "https://github.com/hermes-labs-ai/intent-verify",
   "version": "0.2.1",
-  "license": "https://spdx.org/licenses/MIT",
+  "license": "https://spdx.org/licenses/Apache-2.0",
   "programmingLanguage": "Python",
   "runtimePlatform": "Python >=3.10",
   "identifier": [
