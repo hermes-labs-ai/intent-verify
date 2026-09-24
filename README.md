@@ -10,7 +10,7 @@ Hermes Labs is an agentic infrastructure company building the reliability layer 
 
 [![CI](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml/badge.svg)](https://github.com/hermes-labs-ai/intent-verify/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/intent-verify.svg)](https://pypi.org/project/intent-verify/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-yellow.svg)](LICENSE)
 
 </div>
 
