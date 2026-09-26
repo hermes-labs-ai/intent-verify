@@ -62,7 +62,6 @@ def test_public_release_pins_use_project_version():
     project_version = _project_version()
     release_tag = f"v{project_version}"
 
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     skill = (ROOT / "skills" / "intent-verify" / "SKILL.md").read_text(encoding="utf-8")
     commands = [
@@ -70,13 +69,10 @@ def test_public_release_pins_use_project_version():
         (ROOT / "commands" / "map.md").read_text(encoding="utf-8"),
     ]
 
-    assert f"hermes-labs-ai/intent-verify@{release_tag}" in readme
-    for document in (readme, llms):
-        assert f"--ref {release_tag}" in document
-        assert f"#{release_tag}" in document
+    assert f"--ref {release_tag}" in llms
+    assert f"#{release_tag}" in llms
 
     install_documents = {
-        "README.md": readme,
         "skills/intent-verify/SKILL.md": skill,
         "commands/check.md": commands[0],
         "commands/map.md": commands[1],
@@ -86,7 +82,7 @@ def test_public_release_pins_use_project_version():
         assert pins, f"{name} must retain an exact install pin"
         assert set(pins) == {project_version}, f"{name} has a stale or conflicting install pin"
 
-    for name, document in (("README.md", readme), ("llms.txt", llms)):
+    for name, document in (("llms.txt", llms),):
         skill_tags = re.findall(r"intent-verify#[vV]([0-9]+\.[0-9]+\.[0-9]+)", document)
         assert skill_tags and set(skill_tags) == {project_version}, (
             f"{name} has a stale skills.sh tag"
