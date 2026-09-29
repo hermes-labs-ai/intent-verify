@@ -2,6 +2,8 @@
 
 Thanks for contributing.
 
+Bugs and feature requests: https://github.com/hermes-labs-ai/intent-verify/issues
+
 ## Before opening a PR
 
 - keep the tool narrow
