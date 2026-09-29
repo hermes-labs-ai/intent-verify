@@ -116,3 +116,11 @@ def test_map_rejects_evidence_path_outside_repo():
     )
     assert result.returncode == 2
     assert "escapes repo" in result.stderr
+
+
+def test_cli_version_flag_prints_package_version():
+    from intent_verify import __version__
+
+    result = run_cli("--version")
+    assert result.returncode == 0
+    assert result.stdout.strip() == f"intent-verify {__version__}"
