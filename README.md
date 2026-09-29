@@ -135,6 +135,7 @@ acceptance, merge, release, or publication.
 
 ```bash
 pip install intent-verify
+intent-verify --version   # confirm the installed release
 ```
 
 Or install the CLI from the [Hermes Labs Homebrew tap](https://github.com/hermes-labs-ai/homebrew-tap):

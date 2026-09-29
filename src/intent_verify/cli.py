@@ -4,6 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from . import __version__
 from .models import Verdict
 from .report import run_check, to_coverage_map_json, to_json, to_text
 
@@ -48,6 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
         prog="intent-verify",
         description="Check a markdown spec or handoff doc against a repo to catch spec drift.",
     )
+    parser.add_argument("--version", action="version", version=f"intent-verify {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     check = subparsers.add_parser(
